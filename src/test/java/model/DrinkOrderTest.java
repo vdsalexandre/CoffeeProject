@@ -80,4 +80,25 @@ class DrinkOrderTest {
         assertEquals(0.2, drinkOrder2.getCashNeededToPayOrder());
         System.out.println(drinkOrder2.generateDrinkMakerMessageOrderNotPaid());
     }
+
+    @Test
+    public void createDrinkOrderWithNewDrink() throws WrongOrderException {
+        DrinkOrder drinkOrder = new DrinkOrder(new Order('O', null, null));
+        assertEquals("O::", drinkOrder.generateDrinkMakerCommand());
+        drinkOrder.setCashForDrinkOrder(1);
+        assertEquals(true, drinkOrder.isDrinkOrderPaid());
+        assertEquals(0.4, drinkOrder.getCashToReturnToClient());
+    }
+
+    @Test
+    public void createDrinkOrderWithExtraHotDrink() throws WrongOrderException {
+        DrinkOrder drinkOrder = new DrinkOrder(new Order('C', 3, 0, true));
+        assertEquals("Ch:3:0", drinkOrder.generateDrinkMakerCommand());
+
+        DrinkOrder drinkOrder1 = new DrinkOrder(new Order('H', null, 0, true));
+        assertEquals("Hh::0", drinkOrder1.generateDrinkMakerCommand());
+
+        DrinkOrder drinkOrder2 = new DrinkOrder(new Order('T', 1, null, false));
+        assertEquals("T:1:", drinkOrder2.generateDrinkMakerCommand());
+    }
 }

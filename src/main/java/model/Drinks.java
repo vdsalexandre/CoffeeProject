@@ -3,7 +3,8 @@ package model;
 public enum Drinks {
     TEA('T', "tea", 0.4),
     COFFEE('C', "coffee", 0.6),
-    CHOCOLATE('H', "chocolate", 0.5);
+    CHOCOLATE('H', "chocolate", 0.5),
+    ORANGE_JUICE('O', "orange_juice", 0.6);
 
     private char code;
     private String name;

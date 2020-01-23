@@ -7,6 +7,7 @@ public class Order {
     private Integer sugarQuantity;
     private Integer stickOrNot;
     private String message;
+    private boolean extraHot;
 
     public Order(char orderCode, Integer sugarQuantity, Integer stickOrNot) throws WrongOrderException {
         if (isValidOrder(orderCode, sugarQuantity, stickOrNot)) {
@@ -25,6 +26,17 @@ public class Order {
             this.message = message;
         else
             throw new WrongOrderException("Wrong message ...");
+    }
+
+    public Order(char orderCode, Integer sugarQuantity, Integer stickOrNot, boolean extraHot) throws WrongOrderException {
+        if (isValidOrder(orderCode, sugarQuantity, stickOrNot)) {
+            this.orderCode = orderCode;
+            this.sugarQuantity = sugarQuantity;
+            this.stickOrNot = stickOrNot;
+            this.extraHot = extraHot;
+        }
+        else
+            throw new WrongOrderException("Wrong order ...");
     }
 
     public char getOrderCode() {
@@ -51,6 +63,14 @@ public class Order {
         return message;
     }
 
+    public boolean isExtraHot() {
+        return extraHot;
+    }
+
+    public String isStringExtraHot() {
+        return extraHot ? "h" : "";
+    }
+
     public String getDrinkName() {
         for (Drinks drink : Drinks.values()) {
             if (drink.getCode() == orderCode)
@@ -69,9 +89,10 @@ public class Order {
         }
         else {
             return "Order { " + ",\n\t" +
-                    "orderCode=" + orderCode + ",\n\t" +
-                    "sugarQuantity=" + sugarQuantity + ",\n\t" +
-                    "stickOrNot=" + stickOrNot + ",\n" +
+                    "orderCode= " + orderCode + ",\n\t" +
+                    "extraHot= " + extraHot + ",\n\t" +
+                    "sugarQuantity= " + sugarQuantity + ",\n\t" +
+                    "stickOrNot= " + stickOrNot + ",\n" +
                     '}';
         }
     }

@@ -21,7 +21,7 @@ public class DrinkOrder {
     }
 
     public String generateDrinkMakerCommand() {
-        return order.getOrderCode() + COMMAND_SEPARATOR +
+        return order.getOrderCode() + order.isStringExtraHot() + COMMAND_SEPARATOR +
                                 order.getStringSugarQuantity() + COMMAND_SEPARATOR +
                                 order.getStringStickOrNot();
     }
