@@ -3,7 +3,8 @@ package model;
 import exception.WrongOrderException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DrinkOrderTest {
 
@@ -42,5 +43,18 @@ class DrinkOrderTest {
     public void createDrinkOrderWithStick() throws WrongOrderException {
         DrinkOrder drinkOrder = new DrinkOrder(new Order('C', 2, 0));
         assertEquals("C:2:0", drinkOrder.generateDrinkMakerCommand());
+    }
+
+    @Test
+    public void createDrinkOrderMessage() throws WrongOrderException {
+        DrinkOrder drinkOrder = new DrinkOrder(new Order('M', "Need more sugar"));
+        assertEquals("M:" + drinkOrder.getOrder().getMessage(), drinkOrder.generateDrinkMakerMessage());
+    }
+
+    @Test
+    public void createWrongDrinkOrderMessage() throws WrongOrderException {
+        assertThrows(WrongOrderException.class, () -> {
+           DrinkOrder drinkOrder = new DrinkOrder(new Order('C', "wrong message because of wrong code"));
+        });
     }
 }

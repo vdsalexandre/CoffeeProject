@@ -79,4 +79,11 @@ class OrderTest {
             Order order = new Order('T', null, 2);
         });
     }
+
+    @Test
+    public void createMessageOrder() throws WrongOrderException {
+        Order order = new Order('M', "New message");
+        assertEquals('M', order.getOrderCode());
+        assertEquals("New message", order.getMessage());
+    }
 }

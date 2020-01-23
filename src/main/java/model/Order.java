@@ -6,6 +6,7 @@ public class Order {
     private char orderCode;
     private Integer sugarQuantity;
     private Integer stickOrNot;
+    private String message;
 
     public Order(char orderCode, Integer sugarQuantity, Integer stickOrNot) throws WrongOrderException {
         if (isValidOrder(orderCode, sugarQuantity, stickOrNot)) {
@@ -15,6 +16,15 @@ public class Order {
         }
         else
             throw new WrongOrderException("Wrong order ...");
+    }
+
+    public Order(char orderCode, String message) throws WrongOrderException {
+        this.orderCode = orderCode;
+
+        if (isMessageOrder())
+            this.message = message;
+        else
+            throw new WrongOrderException("Wrong message ...");
     }
 
     public char getOrderCode() {
@@ -37,13 +47,25 @@ public class Order {
         return stickOrNot != null ? String.valueOf((stickOrNot)) : "";
     }
 
+    public String getMessage() {
+        return message;
+    }
+
     @Override
     public String toString() {
-        return "Order { " +
-                "orderCode=" + orderCode +
-                ", sugarQuantity=" + sugarQuantity +
-                ", stickOrNot=" + stickOrNot +
-                '}';
+        if (isMessageOrder()) {
+            return "Order { " + "\n\t" +
+                        "orderCode= " + orderCode + ",\n\t" +
+                        "message= " + message + "\n" +
+                    "}";
+        }
+        else {
+            return "Order { " + ",\n\t" +
+                    "orderCode=" + orderCode + ",\n\t" +
+                    "sugarQuantity=" + sugarQuantity + ",\n\t" +
+                    "stickOrNot=" + stickOrNot + ",\n" +
+                    '}';
+        }
     }
 
     public boolean isValidCode(char code) {
@@ -51,6 +73,10 @@ public class Order {
             if (drink.getCode() == code)
                 return true;
         }
+
+        if (isMessageOrder())
+            return true;
+
         return false;
     }
 
@@ -84,5 +110,9 @@ public class Order {
         if (!isValidStickOrNot(stickOrNot)) return false;
 
         return true;
+    }
+
+    private boolean isMessageOrder() {
+        return orderCode == 'M';
     }
 }

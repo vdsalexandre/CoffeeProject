@@ -6,6 +6,10 @@ public class DrinkOrder {
     private final static String COMMAND_SEPARATOR = ":";
     private Order order;
 
+    public Order getOrder() {
+        return order;
+    }
+
     public DrinkOrder(Order order) throws WrongOrderException {
         if (order != null)
             this.order = order;
@@ -17,5 +21,10 @@ public class DrinkOrder {
         return order.getOrderCode() + COMMAND_SEPARATOR +
                                 order.getStringSugarQuantity() + COMMAND_SEPARATOR +
                                 order.getStringStickOrNot();
+    }
+
+    public String generateDrinkMakerMessage() {
+        return order.getOrderCode() + COMMAND_SEPARATOR +
+                                order.getMessage();
     }
 }
