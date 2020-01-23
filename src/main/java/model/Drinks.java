@@ -1,16 +1,18 @@
 package model;
 
 public enum Drinks {
-    TEA('T', "tea"),
-    COFFEE('C', "coffee"),
-    CHOCOLATE('H', "chocolate");
+    TEA('T', "tea", 0.4),
+    COFFEE('C', "coffee", 0.6),
+    CHOCOLATE('H', "chocolate", 0.5);
 
     private char code;
     private String name;
+    private double price;
 
-    Drinks(char code, String name) {
+    Drinks(char code, String name, double price) {
         this.code = code;
         this.name = name;
+        this.price = price;
     }
 
     public char getCode() {
@@ -19,5 +21,9 @@ public enum Drinks {
 
     public String getName() {
         return name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 }

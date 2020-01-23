@@ -57,4 +57,27 @@ class DrinkOrderTest {
            DrinkOrder drinkOrder = new DrinkOrder(new Order('C', "wrong message because of wrong code"));
         });
     }
+
+    @Test
+    public void createDrinkOrderWithPay() throws WrongOrderException {
+        DrinkOrder drinkOrder = new DrinkOrder(new Order('T', 1, 0));
+        drinkOrder.setCashForDrinkOrder(2);
+        assertEquals(true, drinkOrder.isDrinkOrderPaid());
+        assertEquals(1.6, drinkOrder.getCashToReturnToClient());
+        System.out.println(drinkOrder.generateDrinkMakerMessageOrderPaid());
+    }
+
+    @Test
+    public void createDrinkOrderWithNoPay() throws WrongOrderException {
+        DrinkOrder drinkOrder = new DrinkOrder(new Order('C', null, 0));
+        assertEquals(false, drinkOrder.isDrinkOrderPaid());
+        assertEquals(0.6, drinkOrder.getCashNeededToPayOrder());
+        System.out.println(drinkOrder.generateDrinkMakerMessageOrderNotPaid());
+
+        DrinkOrder drinkOrder2 = new DrinkOrder(new Order('H', 1, 0));
+        drinkOrder2.setCashForDrinkOrder(0.3);
+        assertEquals(false, drinkOrder2.isDrinkOrderPaid());
+        assertEquals(0.2, drinkOrder2.getCashNeededToPayOrder());
+        System.out.println(drinkOrder2.generateDrinkMakerMessageOrderNotPaid());
+    }
 }

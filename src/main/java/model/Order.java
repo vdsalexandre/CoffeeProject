@@ -51,6 +51,14 @@ public class Order {
         return message;
     }
 
+    public String getDrinkName() {
+        for (Drinks drink : Drinks.values()) {
+            if (drink.getCode() == orderCode)
+                return drink.getName();
+        }
+        return "";
+    }
+
     @Override
     public String toString() {
         if (isMessageOrder()) {
